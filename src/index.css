@@ -12,6 +12,8 @@ body {
   background-image: url("/src/assets/images/background.png");
   height: 100vh;
   overflow: hidden;
+  background-size: cover;  
+  background-repeat: no-repeat;
 }
 
 code {

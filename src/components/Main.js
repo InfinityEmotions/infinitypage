@@ -4,20 +4,26 @@ import Mario from "../assets/images/bn-mario.png";
 import Farm from "../assets/images/bn-farm.png";
 import Terracota from "../assets/images/bn-terracota.png";
 import Close from "../assets/images/close.png";
-
 import { Image } from "@nextui-org/react";
+import Cookies from "universal-cookie";
 
-export const Main = () => {
+export const Main = (props) => {
     const fullscreen = useRef(null);
     const [url, setUrl] = useState();
     const urls = {
-        'invasion': 'https://infinityslots.net/invasion/?user=test',
+        'invasion': 'https://infinityslots.net/invasion/',
         'candy': 'https://infinityslots.net/candy/',
         'terracota': 'https://infinityslots.net/terracota/',
         'mario': 'https://infinityslots.net/mario/'
     };
 
     function OpenFullscreen(id) {
+        const cookie = new Cookies();
+        if(cookie.get("userdata") === undefined)
+        {
+            props.showLogin();
+            return;
+        }
 
         setUrl(urls[id]);
         fullscreen.current.style.display = "block";
@@ -54,8 +60,8 @@ export const Main = () => {
                 </div>
             </div>
 
-            <div class="hide" ref={fullscreen}>
-                <span class="close" id="closeButton" onClick={CloseButton}>
+            <div className="hide" ref={fullscreen}>
+                <span className="close" id="closeButton" onClick={CloseButton}>
                     <img src={Close} alt="Boton cerrar" title="Cerrar juego" width="50px" height="50px" />
                 </span>
                 <iframe id="frame" width="100%" height="100%" src={url}></iframe>
