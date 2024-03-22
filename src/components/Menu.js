@@ -10,27 +10,28 @@ export const Menu = (props) => {
     const [singup, setSingup] = useState(false);
     const [username, setUsername] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
         const cookie = new Cookies();
-       setLogged(cookie.get("userdata") !== undefined);       
-       setUsername(cookie.get("userdata").username);
+        setLogged(cookie.get("userdata") !== undefined);
+        if (isLogged)
+            setUsername(cookie.get("userdata").username);
     }, []);
 
     const handleOpenSingup = () => {
         setSingup(!singup);
     };
 
-    function Start(){        
+    function Start() {
         const cookie = new Cookies();
 
-        if(cookie.get("userdata") !== undefined){
+        if (cookie.get("userdata") !== undefined) {
             setLogged(true);
             props.showLogin();
             setUsername(cookie.get("userdata").username);
         }
     }
 
-    function Logout(e){        
+    function Logout(e) {
         const cookie = new Cookies();
         cookie.remove("userdata");
         setLogged(false);
@@ -45,7 +46,7 @@ export const Menu = (props) => {
                 </NavbarBrand>
                 <NavbarContent justify="end">
                     {
-                        !isLogged ?(
+                        !isLogged ? (
                             <React.Fragment>
                                 <NavbarItem>
                                     <Button as={Link} color="secondary" href="#" variant="flat" onClick={handleOpenSingup}>
@@ -58,40 +59,40 @@ export const Menu = (props) => {
                                     </Button>
                                 </NavbarItem>
                             </React.Fragment>
-                        ):(
+                        ) : (
                             <React.Fragment>
-                                 <NavbarContent as="div" justify="end">
+                                <NavbarContent as="div" justify="end">
                                     <Dropdown placement="bottom-end">
-                                    <DropdownTrigger>
-                                        <Avatar
-                                        isBordered
-                                        as="button"
-                                        className="transition-transform"
-                                        color="secondary"
-                                        name="Jason Hughes"
-                                        size="sm"
-                                        src="https://openclipart.org/image/2400px/svg_to_png/167281/generic-avatar.png"
-                                        />
-                                    </DropdownTrigger>
-                                    <DropdownMenu aria-label="Profile Actions" variant="flat">
-                                        <DropdownItem key="profile" className="h-14 gap-2" textValue="Profile">
-                                        <p className="font-semibold">Signed in as</p>
-                                        <p className="font-semibold">{username}</p>
-                                        </DropdownItem>
-                                        <DropdownItem key="settings" textValue="My Settings">My Settings</DropdownItem>
-                                        <DropdownItem key="logout" color="danger" onPress={Logout} textValue="Log Out">Log Out</DropdownItem>
-                                    </DropdownMenu>
+                                        <DropdownTrigger>
+                                            <Avatar
+                                                isBordered
+                                                as="button"
+                                                className="transition-transform"
+                                                color="secondary"
+                                                name="Jason Hughes"
+                                                size="sm"
+                                                src="https://openclipart.org/image/2400px/svg_to_png/167281/generic-avatar.png"
+                                            />
+                                        </DropdownTrigger>
+                                        <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                            <DropdownItem key="profile" className="h-14 gap-2" textValue="Profile">
+                                                <p className="font-semibold">Signed in as</p>
+                                                <p className="font-semibold">{username}</p>
+                                            </DropdownItem>
+                                            <DropdownItem key="settings" textValue="My Settings">My Settings</DropdownItem>
+                                            <DropdownItem key="logout" color="danger" onPress={Logout} textValue="Log Out">Log Out</DropdownItem>
+                                        </DropdownMenu>
                                     </Dropdown>
                                 </NavbarContent>
-                              
+
                             </React.Fragment>
                         )
                     }
                 </NavbarContent>
             </Navbar>
-            
-            <Login isOpen={props.login} handler={props.showLogin} start={Start}/>
-            <Singup isOpen={singup} handler={handleOpenSingup}/>
+
+            <Login isOpen={props.login} handler={props.showLogin} start={Start} />
+            <Singup isOpen={singup} handler={handleOpenSingup} />
         </>
     );
 }
