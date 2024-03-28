@@ -27,3 +27,25 @@ export const Signin = async (user) =>{
 
     return res.status;
 };
+
+
+export const Signup = async (user) =>{
+    const url = "https://infinityslots.net/app/signup";
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username: user.username,
+            password: user.password,
+            name: user.name,
+            surname: user.surname,
+            email: user.email
+
+        })
+    };
+
+    const res = await fetch(url, requestOptions);
+
+
+    return res.status;
+};
