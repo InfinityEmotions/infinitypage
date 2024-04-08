@@ -12,7 +12,7 @@ function App() {
   
   return (
     <>
-      <img src={Coins} className="coins"></img>
+      <img src={Coins} className="coins" alt="Coins"></img>
       <Menu showLogin={ShowLogin} login={login}/>
       <Main showLogin={ShowLogin}/>
     </>

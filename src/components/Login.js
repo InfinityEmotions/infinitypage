@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa"
 import { Signin } from "../controllers/users";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Checkbox, Input, Link, Button } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Checkbox, Input, Link, Button } from "@nextui-org/react";
 
 export const Login = (props) => {
     const init = {
@@ -17,10 +17,6 @@ export const Login = (props) => {
 
     const [user, setUser] = useState(init);
     const [messages, setMessages] = useState(init_messages);
-    function Close() {
-        props.isOpen = false;
-    }
-
     function OnChange(e) {
         
         setMessages(init_messages);   
@@ -45,6 +41,7 @@ export const Login = (props) => {
 
         if(res === 200){            
             props.start();
+            setUser(init);
         }
     }
 

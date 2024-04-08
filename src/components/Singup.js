@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Dialog from "./Dialog";
+import {CreateUser} from "../controllers/users";
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Checkbox, Input, Link, Button } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Input, Button } from "@nextui-org/react";
 
 export const Singup = (props) => {
     const [user, setUser] = useState([]);
@@ -13,8 +14,18 @@ export const Singup = (props) => {
 
     function OnSubmit(e){
        e.preventDefault();
-       console.log(user)
        onOpen();
+    }
+
+    async function OnConfirm(){
+        const res = await CreateUser(user);
+
+        if(res  === 200){
+            onOpenChange();
+            props.handler();
+
+            setUser([]);
+        }
     }
 
     return (
@@ -100,7 +111,7 @@ export const Singup = (props) => {
                     )}
                 </ModalContent>
             </Modal>
-            <Dialog isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} withAction={true} message={"Continue?"} title={"Continue"}/>
+            <Dialog isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} withAction={true} message={"Continue?"} title={"Continue"} OnAction={OnConfirm}/>
         </>
     );
 }

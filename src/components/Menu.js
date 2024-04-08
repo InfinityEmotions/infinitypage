@@ -42,7 +42,7 @@ export const Menu = (props) => {
         <>
             <Navbar shouldHideOnScroll>
                 <NavbarBrand justify="center">
-                    <img src={Logo} className="logo"></img>
+                    <img src={Logo} className="logo" alt="logo"></img>
                 </NavbarBrand>
                 <NavbarContent justify="end">
                     {

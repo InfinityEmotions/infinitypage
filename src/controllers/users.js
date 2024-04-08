@@ -29,7 +29,7 @@ export const Signin = async (user) =>{
 };
 
 
-export const Signup = async (user) =>{
+export const CreateUser = async (user) =>{
     const url = "https://infinityslots.net/app/signup";
     const requestOptions = {
         method: 'POST',
